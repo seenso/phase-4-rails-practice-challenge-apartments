@@ -20,7 +20,6 @@ class TenantsController < ApplicationController
     tenant = Tenant.find(params[:id])
     tenant.update!(tenant_params)
     render json: tenant, status: :accepted
-    
   end
 
   def destroy 
@@ -36,10 +35,10 @@ class TenantsController < ApplicationController
   end
 
   def tenant_params
-    params.permit(:name, :age)
+    params.permit(:id, :name, :age)
   end
 
-  def render_unprocessable_entity_response
+  def render_unprocessable_entity_response(invalid)
     render json: {errors: invalid.record.errors.full_messages}, status: :unprocessable_entity
   end
 
